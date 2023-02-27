@@ -38,7 +38,7 @@
            </form>
            
             <div class="alert alert-danger" id="error-message" role="alert"></div>
-
+            <div class="alert alert-success" id="success-message" role="alert"></div>
             <tr>
                 <td colspan="2" id="table-data"></td>
             </tr>
@@ -65,8 +65,8 @@
                     var fname = $("#name").val();
 
                     if (fname == "") {
+                        $("#success-message").slideUp();
                         $("#error-message").html("All Feild are Required").slideDown();
-                    
                     } else {
                         $.ajax({
                             url: "ajax-insert.php",
@@ -77,10 +77,11 @@
                             success: function(data) {
                                 if (data == 1) {
                                     loadtable();
-                                    $("#addform").trigger("reset");
-                                    $("#error-message").html("Data Save").slideDown();
+                                    $("#error-message").slideUp();
+                                    
+                                    $("#success-message").html("Data Save").slideDown();
                                 } else {
-                                    $("#error-message").html("All Feild are Required");
+                                    $("#error-message").html("Not Save");
                                 }
                             }
                         });
